@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
-# Sagiv Antebi - 318159282
-# Dvir Amram   - 318192200
+# Written by: Sagiv Antebi
+
 
 from scapy.all import *
 
