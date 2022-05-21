@@ -2,7 +2,6 @@
 
 # Written by: Sagiv Antebi
 
-
 from scapy.all import *
 
 #The PC interface in our route list
